@@ -1,10 +1,5 @@
 (function() {
   function seekBar($document) {
-
-/*
-@function calculatePercent
-@desc calculates seekBar value when a user clicks on it
-*/
     var calculatePercent = function(seekBar, event) {
       var offsetX = event.pageX - seekBar.offset().left;
       var seekBarWidth = seekBar.width();
@@ -15,6 +10,7 @@
     };
 
     return {
+
       templateUrl: '/templates/directives/seek_bar.html',
       replace: true,
       restrict: 'E',
@@ -46,7 +42,7 @@
           return {width: percentString()};
         };
 
-        scope.thumbStyle = function() {
+        scope.thumbStyle = function () {
           return {left: percentString()};
         };
 
@@ -55,6 +51,7 @@
           scope.value = percent * scope.max;
           notifyOnChange(scope.value);
         };
+
         scope.trackThumb = function() {
           $document.bind('mousemove.thumb', function(event) {
             var percent = calculatePercent(seekBar, event);
@@ -63,17 +60,20 @@
               notifyOnChange(scope.value);
             });
           });
+
           $document.bind('mouseup.thumb', function() {
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
           });
+
         };
 
-        var notifyOnChange = function(newValue) {
-          if (typeof scope.onChange === 'function') {
-            scope.onChange({value: newValue});
-          }
-        };
+
+          var notifyOnChange = function(newValue) {
+            if (typeof scope.onChange === 'function') {
+              scope.onChange({value: newValue});
+            }
+          };
 
       }
     };
